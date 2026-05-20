@@ -1,0 +1,20 @@
+# Render.com — Web Service (alternative to Vercel)
+# Dashboard → New → Blueprint → connect repo, or paste this file at repo root.
+services:
+  - type: web
+    name: studyflow
+    runtime: node
+    plan: free
+    rootDir: studyflow
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

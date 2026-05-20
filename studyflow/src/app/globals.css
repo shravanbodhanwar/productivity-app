@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --color-notion-bg: #ffffff;
+  --color-notion-sidebar: #f7f6f3;
+  --color-notion-hover: rgba(55, 53, 47, 0.08);
+  --color-notion-text: #37352f;
+  --color-notion-muted: rgba(55, 53, 47, 0.65);
+  --color-notion-border: rgba(55, 53, 47, 0.09);
+  --color-notion-accent: #2383e2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-notion-text);
+  background: var(--color-notion-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* TipTap / Notion-style editor */
+.notion-editor .ProseMirror {
+  outline: none;
+  min-height: 280px;
+  padding: 2px 0 96px;
+  font-size: 16px;
+  line-height: 1.5;
+  caret-color: var(--color-notion-text);
+}
+
+.notion-editor .ProseMirror > * + * {
+  margin-top: 0.25em;
+}
+
+.notion-editor .ProseMirror h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 1.25em 0 0.25em;
+}
+
+.notion-editor .ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1em 0 0.2em;
+}
+
+.notion-editor .ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.75em 0 0.15em;
+}
+
+.notion-editor .ProseMirror p.is-editor-empty:first-child::before {
+  color: rgba(55, 53, 47, 0.4);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.notion-editor .ProseMirror ul,
+.notion-editor .ProseMirror ol {
+  padding-left: 1.5rem;
+}
+
+.notion-editor .ProseMirror blockquote {
+  border-left: 3px solid var(--color-notion-border);
+  padding-left: 1rem;
+  color: var(--color-notion-muted);
+  margin: 0.5em 0;
+}
+
+.notion-editor .ProseMirror code {
+  background: rgba(135, 131, 120, 0.15);
+  border-radius: 3px;
+  padding: 0.15em 0.35em;
+  font-size: 0.9em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.notion-editor .ProseMirror pre {
+  background: #f7f6f3;
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.notion-editor .ProseMirror pre code {
+  background: none;
+  padding: 0;
+}
+
+.notion-editor .ProseMirror a {
+  color: var(--color-notion-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.notion-editor .ProseMirror mark {
+  background: rgba(255, 212, 0, 0.35);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.notion-editor .ProseMirror ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+
+.notion-editor .ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.notion-editor .ProseMirror ul[data-type="taskList"] li > label {
+  margin-top: 0.2rem;
+}
+
+.notion-editor .ProseMirror ul[data-type="taskList"] li[data-checked="true"] > div > p {
+  text-decoration: line-through;
+  color: var(--color-notion-muted);
+}
+
+/* Scrollbars */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(55, 53, 47, 0.16);
+  border-radius: 3px;
+}
