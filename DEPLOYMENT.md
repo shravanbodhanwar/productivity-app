@@ -98,20 +98,10 @@ In Google Cloud Console → **APIs & Services** → **Credentials**:
 
 ### Step 1: Initialize git (if not already)
 
-From the folder that contains `studyflow`:
+From the repository root (where `package.json` lives):
 
 ```bash
 cd "d:\productivity app"
-git init
-git add studyflow
-git commit -m "Prepare StudyFlow for deployment"
-```
-
-Or if `studyflow` is already the repo root:
-
-```bash
-cd "d:\productivity app\studyflow"
-git init
 git add .
 git commit -m "Prepare StudyFlow for deployment"
 ```
@@ -137,8 +127,7 @@ git push -u origin main
 
 1. Go to [https://vercel.com](https://vercel.com) → **Add New** → **Project**
 2. Import your GitHub repository
-3. If the repo root is `productivity app` and the app is in a subfolder:
-   - Set **Root Directory** to `studyflow`
+3. **Root Directory** must be empty (`.` / repo root) — `package.json` and `next.config.ts` are at the top level.
 4. Framework should auto-detect **Next.js**
 
 ### Step 2: Environment variables
@@ -182,7 +171,7 @@ Use this if you prefer Render over Vercel.
 1. [https://dashboard.render.com](https://dashboard.render.com) → **New +** → **Web Service**
 2. Connect the same GitHub repo
 3. Settings:
-   - **Root Directory:** `studyflow` (if app is in subfolder)
+   - **Root Directory:** leave empty (repo root)
    - **Runtime:** Node
    - **Build Command:** `npm install && npm run build`
    - **Start Command:** `npm start`
@@ -212,7 +201,7 @@ Optional: `NODE_VERSION` = `20`
 ## Part 6 — Local development
 
 ```bash
-cd studyflow
+cd "productivity app"
 cp .env.example .env.local
 # Edit .env.local with your Supabase + Gemini keys
 npm install
@@ -269,9 +258,15 @@ When someone visits your deployed site and signs up, their pages and tasks are s
 - Check Supabase **Redirect URLs** include `https://YOUR-DOMAIN/auth/callback`
 - **Site URL** must match your live domain
 
+### Vercel shows NOT_FOUND (404)
+
+- **Root cause:** Vercel built the wrong folder (no `package.json` at project root).
+- **Fix:** Project Settings → General → **Root Directory** = empty (not `studyflow`). Redeploy.
+- Confirm **Build** logs show `next build` and routes like `/`, `/auth`, `/api/ai`.
+
 ### Build fails on Vercel
 
-- Set **Root Directory** to `studyflow` if needed
+- Root Directory must be repo root (where `package.json` lives)
 - Use Node 20 (default on Vercel is fine)
 
 ### Render: app sleeps
